@@ -23,6 +23,7 @@ export default function Login() {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const userData = docSnap.data() as any;
+         alert('Login successful!'); 
         if (userData.role === 'buyer') router.replace('/buyerhome');
         else router.replace('/vendorhome');
       } else {
