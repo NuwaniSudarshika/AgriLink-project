@@ -4,13 +4,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBzZNASsREsS0Y2nGrl1PnCzSJ2GH2iLyA",
-  authDomain: "agrilinkproject-b4777.firebaseapp.com",
-  projectId: "agrilinkproject-b4777",
-  storageBucket: "agrilinkproject-b4777.firebasestorage.app",
-  messagingSenderId: "56075299158",
-  appId: "1:56075299158:web:2f98db12287f5146e9cef7",
-  measurementId: "G-WHMV70CX37",
+  apiKey: "AIzaSyCwRCx_fhNBRP7H-Ma2lNVUf9wF9A8MQzk",
+  authDomain: "agrilink-8e85a.firebaseapp.com",
+  projectId: "agrilink-8e85a",
+  storageBucket: "agrilink-8e85a.firebasestorage.app",
+  messagingSenderId: "464568267391",
+  appId: "1:464568267391:web:561912448fc5f7cfbc854a",
+  measurementId: "G-RBYB4EGF15"
 };
 
 export const app = initializeApp(firebaseConfig);
