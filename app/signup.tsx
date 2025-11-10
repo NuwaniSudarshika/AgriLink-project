@@ -1,11 +1,10 @@
-// app/signup.tsx
 import { useRouter } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
-import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { auth, db } from '../firebaseconfig';
-import styles from './styles/SignupStyles'; // keep your styles folder under app/
+import styles from './styles/SignupStyles';
 
 export default function Signup() {
   const router = useRouter();
@@ -17,23 +16,23 @@ export default function Signup() {
 
   const handleSignup = async () => {
     if (!fullName || !email || !password || !confirmPassword) {
-      Alert.alert('Error','Please fill all fields.');
+      alert('Please fill all fields.');
       return;
     }
     if (password !== confirmPassword) {
-      Alert.alert('Error','Passwords do not match.');
+     alert('Passwords do not match.');
       return;
     }
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       await setDoc(doc(db,'users', user.uid), { fullName, email, role, createdAt: new Date() });
-      Alert.alert('Success','Account created!');
+      alert('Successfully Account created!');
       if (role === 'buyer' || role === 'vendor'){
         router.push("/login");
       }
     } catch (err: any) {
-      Alert.alert('Signup Error', err.message);
+      alert( err.message);
     }
   };
 
