@@ -29,8 +29,9 @@ export default function Signup() {
       const user = userCredential.user;
       await setDoc(doc(db,'users', user.uid), { fullName, email, role, createdAt: new Date() });
       Alert.alert('Success','Account created!');
-      if (role === 'buyer') router.replace('/buyerhome');
-      else router.replace('/vendorhome');
+      if (role === 'buyer' || role === 'vendor'){
+        router.push("/login");
+      }
     } catch (err: any) {
       Alert.alert('Signup Error', err.message);
     }
