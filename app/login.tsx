@@ -24,8 +24,12 @@ export default function Login() {
       if (docSnap.exists()) {
         const userData = docSnap.data() as any;
          alert('Login successful!'); 
-        if (userData.role === 'buyer') router.replace('/buyerhome');
-        else router.replace('/vendorhome');
+        if (userData.role === 'buyer'){
+          router.push('/buyerhome');
+        }  
+        else{
+          router.push('/vendorhome');
+        }
       } else {
         alert('No user data found.');
       }

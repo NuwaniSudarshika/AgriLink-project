@@ -1,4 +1,3 @@
-// app/splash.tsx
 import { useRouter } from 'expo-router';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
@@ -17,16 +16,16 @@ export default function Splash() {
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             const { role } = docSnap.data() as any;
-            if (role === 'buyer') router.replace('/buyerhome');
-            else router.replace('/vendorhome');
+            if (role === 'buyer') router.push('/buyerhome');
+            else router.push('/vendorhome');
           } else {
-            router.replace('/login');
+            router.push('/login');
           }
         } catch {
-          router.replace('/login');
+          router.push('/login');
         }
       } else {
-        router.replace('/login');
+        router.push('/login');
       }
     });
 

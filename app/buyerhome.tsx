@@ -9,7 +9,7 @@ export default function BuyerHome() {
   const router = useRouter();
   const handleLogout = async () => {
     await signOut(auth);
-    router.replace('/login');
+    router.push('/login');
   };
 
   return (
