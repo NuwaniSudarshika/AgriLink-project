@@ -9,7 +9,7 @@ export default function VendorHome() {
 
   const handleLogout = async () => {
     await signOut(auth);
-    router.replace('/login'); // after logout, go back to login page
+    router.push('/login'); // after logout, go back to login page
   };
 
   return (
