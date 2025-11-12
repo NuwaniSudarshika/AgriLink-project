@@ -5,6 +5,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
+ 
 const EditProfileScreen = () => {
   const auth = getAuth();
   const db = getFirestore();
@@ -80,9 +81,10 @@ const EditProfileScreen = () => {
     <View style={styles.container}>
       <TouchableOpacity onPress={pickImage}>
         <Image
-          source={profileImage ? { uri: profileImage } : require('./assets/default-avatar.png')}
-          style={styles.avatar}
-        />
+  source={profileImage ? { uri: profileImage } : require('../../../assets/images/default-avatar.png')}
+  style={styles.avatar}
+/>
+
         <Text style={styles.cameraIcon}>📷</Text>
       </TouchableOpacity>
 
