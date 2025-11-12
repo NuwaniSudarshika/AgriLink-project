@@ -1,3 +1,4 @@
+// app/vendorhome.tsx
 import { useRouter } from 'expo-router';
 import { signOut } from 'firebase/auth';
 import React from 'react';
@@ -6,53 +7,34 @@ import { auth } from '../firebaseconfig';
 
 export default function VendorHome() {
   const router = useRouter();
-
-  const handleLogout = async () => {
-    await signOut(auth);
-    router.push('/login'); // after logout, go back to login page
-  };
+  const logout = async () => { await signOut(auth); router.replace('/login'); };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome to AgriLink Vendor Home! 🌾</Text>
-      <Text style={styles.subText}>Here you can manage your products and orders.</Text>
+      <Text style={styles.h1}>Vendor Dashboard</Text>
 
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutText}>Logout</Text>
+      <TouchableOpacity style={styles.btn} onPress={() => router.push('./vendor/searchpage')}>
+        <Text style={styles.btnText}>Browse Products</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.btn} onPress={() => router.push('./vendor/addnewproduct')}>
+        <Text style={styles.btnText}>Add New Product</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.btn} onPress={() => router.push('./vendor/profile')}>
+        <Text style={styles.btnText}>Profile</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[styles.btn,styles.danger]} onPress={logout}>
+        <Text style={styles.btnText}>Logout</Text>
       </TouchableOpacity>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFF3E0',
-    padding: 20,
-  },
-  text: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#E65100',
-    marginBottom: 10,
-  },
-  subText: {
-    fontSize: 16,
-    color: '#5D4037',
-    marginBottom: 30,
-    textAlign: 'center',
-  },
-  logoutButton: {
-    backgroundColor: '#C62828',
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    borderRadius: 8,
-  },
-  logoutText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
+  container:{flex:1,alignItems:'center',justifyContent:'center',padding:20, backgroundColor:'#FFF3E0'},
+  h1:{fontSize:22,fontWeight:'700',color:'#E65100',marginBottom:20},
+  btn:{width:'80%',padding:14,backgroundColor:'#E65100',borderRadius:10,marginVertical:8,alignItems:'center'},
+  btnText:{color:'#fff',fontWeight:'600'},
+  danger:{backgroundColor:'#C62828'}
 });

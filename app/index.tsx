@@ -5,21 +5,15 @@ import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 export default function Index() {
   const router = useRouter();
-
   useEffect(() => {
-    const timer = setTimeout(() => {
-      router.replace("/splash");
-    }, 100); // small delay to ensure router is ready
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => router.replace("/splash"), 80);
+    return () => clearTimeout(t);
   }, []);
-
   return (
-    <View style={styles.container}>
+    <View style={s.container}>
       <ActivityIndicator size="large" color="#4CAF50" />
     </View>
   );
 }
+const s = StyleSheet.create({ container: { flex:1, alignItems:'center', justifyContent:'center' }});
 
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" },
-});
