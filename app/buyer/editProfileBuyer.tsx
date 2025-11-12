@@ -1,4 +1,4 @@
-import * as ImagePicker from 'expo-image-picker';
+/*import * as ImagePicker from 'expo-image-picker';
 import { getAuth, updatePassword, updateProfile } from 'firebase/auth';
 import { doc, getDoc, getFirestore, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
@@ -134,4 +134,4 @@ const styles = StyleSheet.create({
   input: { marginVertical: 10, padding: 12, borderRadius: 8, backgroundColor: '#ffe5d9' },
   button: { backgroundColor: '#4CAF50', padding: 15, borderRadius: 8, marginTop: 20 },
   buttonText: { color: '#fff', textAlign: 'center', fontWeight: 'bold' },
-});
+});*/
