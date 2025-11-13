@@ -4,9 +4,9 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 25,
+    padding: 30,
     justifyContent: 'center',
-    alignItems: 'center',
+    
   },
   logo: {
     fontSize: 32,
@@ -15,19 +15,21 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 20,
+    fontSize: 32,
+        fontWeight: "bold",
+        marginBottom: 40,
+        textAlign: "center",
   },
   input: {
-    width: '100%',
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    marginVertical: 8,
+        width: "100%",
+        height: 50,
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderRadius: 8,
+        paddingHorizontal: 10,
+        marginBottom: 20,
+        fontSize: 16,
+        color: "#776e6eff",
   },
   loginButton: {
     backgroundColor: '#4CAF50',
@@ -46,9 +48,15 @@ export default StyleSheet.create({
     fontSize: 14,
     color: '#666',
     marginTop: 15,
+    textAlign: "center",
   },
   signupText: {
     color: '#4CAF50',
     fontWeight: 'bold',
   },
+    name: {
+        fontSize: 17,
+        marginBottom: 5,
+        textAlign: "left",
+    },
 });
