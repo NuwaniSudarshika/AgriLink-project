@@ -17,7 +17,7 @@ export default function BuyerHome() {
         <Text style={styles.btnText}>Search Products</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.btn} onPress={() => router.push('./buyer/profile')}>
+      <TouchableOpacity style={styles.btn} onPress={() => router.push('./buyer/BuyerProfile')}>
         <Text style={styles.btnText}>Profile</Text>
       </TouchableOpacity>
 

@@ -3,22 +3,18 @@ import { Link } from "expo-router";
 import React, { useState } from "react";
 import { Image, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 
-export default function ProfileScreen() {
+export default function VendorProfile() {
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => setIsEnabled((prev) => !prev);
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.profileHeader}>
-        <Image
-        source={require("../../assets/profile.png")}
-          style={styles.avatar}
-        />
+        <Image source={require("../../assets/profile.png")} style={styles.avatar} />
         <Text style={styles.name}>Jenny Smith</Text>
         <Text style={styles.verified}>Verified Vendor</Text>
         <Text style={styles.rating}>4.8</Text>
 
-        {/* Stars + Reviews */}
         <View style={styles.starsContainer}>
           <Ionicons name="star" size={20} color="#f4c10f" />
           <Ionicons name="star-outline" size={20} color="#ccc" />
@@ -28,13 +24,12 @@ export default function ProfileScreen() {
         </View>
         <Text style={styles.reviews}>120 reviews</Text>
 
-        {/* Buttons */}
         <View style={styles.buttonContainer}>
-           <Link href="/vendor/editProfileVendor" asChild>
-             <TouchableOpacity style={styles.editBtn}>
-             <Text style={styles.editText}>Edit Profile</Text>
-             </TouchableOpacity>
-             </Link>
+          <Link href="/vendor/editProfileVendor" asChild>
+            <TouchableOpacity style={styles.editBtn}>
+              <Text style={styles.editText}>Edit Profile</Text>
+            </TouchableOpacity>
+          </Link>
 
           <TouchableOpacity style={styles.listBtn}>
             <Text style={styles.listText}>View my listings</Text>
@@ -42,7 +37,6 @@ export default function ProfileScreen() {
         </View>
       </View>
 
-      {/* Basic Info */}
       <View style={styles.infoBox}>
         <Text style={styles.infoHeader}>Basic Information</Text>
         <View style={styles.infoRow}>
@@ -63,19 +57,18 @@ export default function ProfileScreen() {
         </View>
       </View>
 
-      {/* Notifications */}
       <View style={styles.switchRow}>
         <Text style={styles.switchText}>Notifications</Text>
         <Switch value={isEnabled} onValueChange={toggleSwitch} />
       </View>
 
-      {/* Change Password */}
-      <TouchableOpacity style={styles.optionBtn}>
-        <Ionicons name="lock-closed-outline" size={18} color="#333" />
-        <Text style={styles.optionText}>Change Password</Text>
-      </TouchableOpacity>
+      <Link href="/vendor/changePassword" asChild>
+        <TouchableOpacity style={styles.optionBtn}>
+          <Ionicons name="lock-closed-outline" size={18} color="#333" />
+          <Text style={styles.optionText}>Change Password</Text>
+        </TouchableOpacity>
+      </Link>
 
-      {/* Logout */}
       <TouchableOpacity style={styles.logoutBtn}>
         <Ionicons name="log-out-outline" size={20} color="#e74c3c" />
         <Text style={styles.logoutText}>Logout</Text>
@@ -109,7 +102,6 @@ const styles = StyleSheet.create({
   },
   editText: { color: "#333", fontWeight: "500" },
   listText: { color: "#fff", fontWeight: "500" },
-
   infoBox: {
     backgroundColor: "#efececff",
     padding: 15,
@@ -120,7 +112,6 @@ const styles = StyleSheet.create({
   infoHeader: { fontWeight: "bold", fontSize: 16, marginBottom: 10 },
   infoRow: { flexDirection: "row", alignItems: "center", marginBottom: 8 },
   infoText: { marginLeft: 8, color: "#555" },
-
   switchRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -131,7 +122,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   switchText: { fontSize: 16, fontWeight: "500" },
-
   optionBtn: {
     flexDirection: "row",
     alignItems: "center",
@@ -141,7 +131,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   optionText: { marginLeft: 8, fontSize: 16, color: "#333" },
-
   logoutBtn: {
     flexDirection: "row",
     alignItems: "center",
@@ -150,9 +139,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginTop: 25,
     backgroundColor: "#fff",
-  },
-  linkText:{
-
   },
   logoutText: { marginLeft: 6, color: "#e74c3c", fontWeight: "bold", fontSize: 16 },
 });
