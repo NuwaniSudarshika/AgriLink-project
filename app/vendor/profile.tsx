@@ -1,41 +1,158 @@
-// app/buyer/profile.tsx
-import { useRouter } from 'expo-router';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
-import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { auth, db } from '../../firebaseconfig';
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Link } from "expo-router";
+import React, { useState } from "react";
+import { Image, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 
-export default function BuyerProfile(){
-  const router = useRouter();
-  const uid = auth.currentUser?.uid;
-  const [data, setData] = useState<any>({ fullName:'', email:'', phone:'', bio:'' });
-  useEffect(()=> {
-    if (!uid) return;
-    getDoc(doc(db,'users',uid)).then(snap => { if (snap.exists()) setData(snap.data()); });
-  },[uid]);
-
-  const save = async () => {
-    try {
-      await updateDoc(doc(db,'users',uid!), { fullName: data.fullName, phone: data.phone, bio: data.bio });
-      Alert.alert('Saved');
-    } catch(e:any){ Alert.alert('Error', e.message); }
-  };
+export default function ProfileScreen() {
+  const [isEnabled, setIsEnabled] = useState(true);
+  const toggleSwitch = () => setIsEnabled((prev) => !prev);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.h1}>Profile</Text>
-      <TextInput style={styles.input} value={data.fullName} onChangeText={(t)=>setData({...data, fullName:t})} placeholder="Full Name"/>
-      <TextInput style={styles.input} value={data.email} editable={false} />
-      <TextInput style={styles.input} value={data.phone} onChangeText={(t)=>setData({...data, phone:t})} placeholder="Phone"/>
-      <TextInput style={[styles.input,{height:100}]} value={data.bio} multiline onChangeText={(t)=>setData({...data, bio:t})} placeholder="Bio"/>
-      <TouchableOpacity style={styles.saveBtn} onPress={save}><Text style={{color:'#fff'}}>Save</Text></TouchableOpacity>
-      <TouchableOpacity style={[styles.saveBtn,{backgroundColor:'#ccc',marginTop:8}]} onPress={()=>router.back()}><Text>Back</Text></TouchableOpacity>
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.profileHeader}>
+        <Image
+        source={require("../../assets/profile.png")}
+          style={styles.avatar}
+        />
+        <Text style={styles.name}>Jenny Smith</Text>
+        <Text style={styles.verified}>Verified Vendor</Text>
+        <Text style={styles.rating}>4.8</Text>
+
+        {/* Stars + Reviews */}
+        <View style={styles.starsContainer}>
+          <Ionicons name="star" size={20} color="#f4c10f" />
+          <Ionicons name="star-outline" size={20} color="#ccc" />
+          <Ionicons name="star-outline" size={20} color="#ccc" />
+          <Ionicons name="star-outline" size={20} color="#ccc" />
+          <Ionicons name="star-outline" size={20} color="#ccc" />
+        </View>
+        <Text style={styles.reviews}>120 reviews</Text>
+
+        {/* Buttons */}
+        <View style={styles.buttonContainer}>
+           <Link href="/vendor/editProfileVendor" asChild>
+             <TouchableOpacity style={styles.editBtn}>
+             <Text style={styles.editText}>Edit Profile</Text>
+             </TouchableOpacity>
+             </Link>
+
+          <TouchableOpacity style={styles.listBtn}>
+            <Text style={styles.listText}>View my listings</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* Basic Info */}
+      <View style={styles.infoBox}>
+        <Text style={styles.infoHeader}>Basic Information</Text>
+        <View style={styles.infoRow}>
+          <Ionicons name="mail-outline" size={18} color="#555" />
+          <Text style={styles.infoText}>Jenny@gmail.com</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <MaterialIcons name="category" size={18} color="#555" />
+          <Text style={styles.infoText}>Organic vegetables</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Ionicons name="location-outline" size={18} color="#555" />
+          <Text style={styles.infoText}>Sunny Acres Farm</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Ionicons name="time-outline" size={18} color="#555" />
+          <Text style={styles.infoText}>15 years</Text>
+        </View>
+      </View>
+
+      {/* Notifications */}
+      <View style={styles.switchRow}>
+        <Text style={styles.switchText}>Notifications</Text>
+        <Switch value={isEnabled} onValueChange={toggleSwitch} />
+      </View>
+
+      {/* Change Password */}
+      <TouchableOpacity style={styles.optionBtn}>
+        <Ionicons name="lock-closed-outline" size={18} color="#333" />
+        <Text style={styles.optionText}>Change Password</Text>
+      </TouchableOpacity>
+
+      {/* Logout */}
+      <TouchableOpacity style={styles.logoutBtn}>
+        <Ionicons name="log-out-outline" size={20} color="#e74c3c" />
+        <Text style={styles.logoutText}>Logout</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 }
+
 const styles = StyleSheet.create({
-  container:{flex:1,padding:16,backgroundColor:'#fff'},
-  h1:{fontSize:20,fontWeight:'700',marginBottom:12},
-  input:{borderWidth:1,borderColor:'#ddd',padding:10,borderRadius:8,marginBottom:8},
-  saveBtn:{backgroundColor:'#4CAF50',padding:12,alignItems:'center',borderRadius:8}
+  container: { flex: 1, backgroundColor: "#f9f9f9", padding: 20 },
+  profileHeader: { alignItems: "center", marginTop: 20 },
+  avatar: { width: 100, height: 100, borderRadius: 50, marginBottom: 10 },
+  name: { fontSize: 20, fontWeight: "bold" },
+  verified: { color: "green", fontWeight: "600", marginBottom: 5 },
+  rating: { fontSize: 28, fontWeight: "bold", marginBottom: 5 },
+  starsContainer: { flexDirection: "row", marginVertical: 5 },
+  reviews: { color: "#777", marginBottom: 10 },
+  buttonContainer: { flexDirection: "row", justifyContent: "center", marginTop: 10 },
+  editBtn: {
+    backgroundColor: "#ddd",
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    marginRight: 10,
+  },
+  listBtn: {
+    backgroundColor: "#00b140",
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+  },
+  editText: { color: "#333", fontWeight: "500" },
+  listText: { color: "#fff", fontWeight: "500" },
+
+  infoBox: {
+    backgroundColor: "#efececff",
+    padding: 15,
+    borderRadius: 12,
+    marginTop: 20,
+    elevation: 2,
+  },
+  infoHeader: { fontWeight: "bold", fontSize: 16, marginBottom: 10 },
+  infoRow: { flexDirection: "row", alignItems: "center", marginBottom: 8 },
+  infoText: { marginLeft: 8, color: "#555" },
+
+  switchRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#efececff",
+    padding: 15,
+    borderRadius: 12,
+    marginTop: 20,
+  },
+  switchText: { fontSize: 16, fontWeight: "500" },
+
+  optionBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#efececff",
+    padding: 15,
+    borderRadius: 12,
+    marginTop: 15,
+  },
+  optionText: { marginLeft: 8, fontSize: 16, color: "#333" },
+
+  logoutBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 15,
+    borderRadius: 12,
+    marginTop: 25,
+    backgroundColor: "#fff",
+  },
+  linkText:{
+
+  },
+  logoutText: { marginLeft: 6, color: "#e74c3c", fontWeight: "bold", fontSize: 16 },
 });

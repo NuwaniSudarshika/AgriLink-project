@@ -2,7 +2,7 @@ import { useRouter } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { auth, db } from '../firebaseconfig';
 import styles from './styles/SignupStyles';
 
@@ -37,9 +37,15 @@ export default function Signup() {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+     <ScrollView contentContainerStyle={styles.scrollContainer}>
+
+    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+      <Image
+        source={require("../assets/Logo.jpg")}
+        style={{ width: 150, height: 150, alignSelf: "center", marginTop: 4 }}
+      />
+
       <View style={styles.container}>
-        <Text style={styles.logo}>AgriLink</Text>
         <Text style={styles.title}>Create your AgriLink Account</Text>
 
         <View style={styles.roleContainer}>
@@ -59,8 +65,10 @@ export default function Signup() {
 
         <TouchableOpacity style={styles.signupButton} onPress={handleSignup}><Text style={styles.signupButtonText}>Sign Up</Text></TouchableOpacity>
 
-        <TouchableOpacity onPress={() => router.push('/login')}><Text style={styles.linkText}>Already have an account? Log in</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push('/login')}><Text style={styles.linkText}>Already have an account?<Text style={styles.loginButtonText}>Log In</Text></Text></TouchableOpacity>
       </View>
+        </View>
     </ScrollView>
+   
   );
 }
