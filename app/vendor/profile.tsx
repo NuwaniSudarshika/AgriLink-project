@@ -1,7 +1,28 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import React, { useState } from "react";
-import { Alert, Image, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, Image, Platform, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
+
+// ✅ Safe notification setup for native platforms only
+useEffect(() => {
+  if (Platform.OS !== 'web') {
+    import('expo-notifications').then((Notifications) => {
+      Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+    shouldShowBanner: true, // ✅ required
+    shouldShowList: true,   // ✅ required
+  }),
+});
+
+
+      // Optional: register for push token
+      // Notifications.getExpoPushTokenAsync().then(token => console.log(token));
+    });
+  }
+}, []);
 
 export default function VendorProfile() {
   const [isEnabled, setIsEnabled] = useState(true);
@@ -63,10 +84,9 @@ export default function VendorProfile() {
       </View>
 
       <TouchableOpacity style={styles.optionBtn} onPress={() => Alert.alert('Coming Soon', 'Password change feature is not available yet.')}>
-  <Ionicons name="lock-closed-outline" size={18} color="#333" />
-  <Text style={styles.optionText}>Change Password</Text>
-</TouchableOpacity>
-
+        <Ionicons name="lock-closed-outline" size={18} color="#333" />
+        <Text style={styles.optionText}>Change Password</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity style={styles.logoutBtn}>
         <Ionicons name="log-out-outline" size={20} color="#e74c3c" />
