@@ -3,7 +3,7 @@ import { Link } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Alert, Image, Platform, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 
-// ✅ Safe notification setup for native platforms only
+
 useEffect(() => {
   if (Platform.OS !== 'web') {
     import('expo-notifications').then((Notifications) => {
@@ -12,8 +12,8 @@ useEffect(() => {
     shouldShowAlert: true,
     shouldPlaySound: false,
     shouldSetBadge: false,
-    shouldShowBanner: true, // ✅ required
-    shouldShowList: true,   // ✅ required
+    shouldShowBanner: true, 
+    shouldShowList: true,  
   }),
 });
 
