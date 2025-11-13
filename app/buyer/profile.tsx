@@ -17,7 +17,8 @@ export default function BuyerProfile() {
     if (!uid) return;
     getDoc(doc(db, 'users', uid)).then(snap => {
       if (snap.exists()) {
-        setData({ ...snap.data(), email: user?.email || '' });
+        setData(prev => ({ ...prev, email: user?.email || '' }));
+
       }
     });
   }, [uid]);

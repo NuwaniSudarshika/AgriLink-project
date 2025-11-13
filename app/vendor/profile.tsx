@@ -1,7 +1,7 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import React, { useState } from "react";
-import { Image, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 
 export default function VendorProfile() {
   const [isEnabled, setIsEnabled] = useState(true);
@@ -62,12 +62,11 @@ export default function VendorProfile() {
         <Switch value={isEnabled} onValueChange={toggleSwitch} />
       </View>
 
-      <Link href="/vendor/changePassword" asChild>
-        <TouchableOpacity style={styles.optionBtn}>
-          <Ionicons name="lock-closed-outline" size={18} color="#333" />
-          <Text style={styles.optionText}>Change Password</Text>
-        </TouchableOpacity>
-      </Link>
+      <TouchableOpacity style={styles.optionBtn} onPress={() => Alert.alert('Coming Soon', 'Password change feature is not available yet.')}>
+  <Ionicons name="lock-closed-outline" size={18} color="#333" />
+  <Text style={styles.optionText}>Change Password</Text>
+</TouchableOpacity>
+
 
       <TouchableOpacity style={styles.logoutBtn}>
         <Ionicons name="log-out-outline" size={20} color="#e74c3c" />
